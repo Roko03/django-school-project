@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <h2 class="naslov">Lista svih profesora</h2>
+    <table>
+        <tr>
+            <th>Ime</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for professor in professors %}
+        <tr>
+            <td>{{professor.username}}</td>
+            <td>{{professor.email}}</td>
+            <td><a href="{% url 'admin_professor_update' professor.id %}">Edit</a></td>
+            <td><a href="{% url 'admin_professor_delete' professor.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+{% endblock content %}

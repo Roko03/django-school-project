@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="delete_form">
+    {% csrf_token %}
+    <p>Želiš li zaista izbrisati "{{obj}}"?</p>
+    <a href="{{request.META.HTTP_REFERER}}">Idi natrag</a>
+    <input type="submit" value="Confirm" />
+</form>
+
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <h2 class="naslov">Lista studenata upisanih po predmetu</h2>
+    <div class="subjects">
+        {% for key,value in upisi.items %}
+        {% if value %}
+        <div class="subject">
+            <h2>{{key}}</h2>
+            <table>
+                <tr>
+                    <th>Student</th>
+                    <th>Status</th>
+                    <th>Godina</th>
+                    <th>Izborni</th>
+                    <th></th>
+                </tr>
+                {% for upis in value %}
+                <tr>
+                    <td>{{ upis.korisnik_id.username }}</td>
+                    {% if upis.korisnik_id.status == 'izv' %}
+                    <td>Izvanredni</td>
+                    <td>{{upis.predmet_id.sem_izvanredni}}</td>
+                    {% else %}
+                    <td>Redivni</td>
+                    <td>{{upis.predmet_id.sem_redovni}}</td>
+                    {% endif %}
+                    <td>{{upis.predmet_id.izborni}}</td>
+                    <td>
+                        <a href="{% url 'admin_upisi_delete' upis.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock content %}

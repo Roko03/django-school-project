@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="form">
+    {% csrf_token %}
+    <p>Želiš li se zaista upisati u predmet "{{obj}}"?</p>
+    <a href="{{request.META.HTTP_REFERER}}">Idi natrag</a>
+    <input type="submit" value="Confirm" />
+</form>
+
+{% endblock content %}

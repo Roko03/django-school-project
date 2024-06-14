@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="form">
+    <h2>Unesi profesora</h2>
+    {% csrf_token %}
+    <label>
+        {{form.username}}
+    </label>
+    <label>
+        {{form.email}}
+    </label>
+    {% if form.erroros or form.non_fied_errors %}
+    <div>
+        {% for field in form %}
+        {{field.errors}}
+        {% endfor %}
+
+        {{ form.non_fied_errors }}
+    </div>
+    {% endif %}
+    <button>Uredi</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <h2 class="naslov">Moji predmeti</h2>
+    <div class="subjects">
+        {% for key, value in subjects.items%}
+        {% if value %}
+        <div class="subject">
+            <h1>Broj semestra: {{key}}</h1>
+            <table>
+                <tr>
+                    <th>Naziv predmeta</th>
+                    <th>Kod predmeta</th>
+                    <th>Izborni</th>
+                    <th>Status predmeta</th>
+                    <th></th>
+                </tr>
+                {% for subject in value %}
+                <tr>
+                    <td>{{subject.predmet_id.ime}}</td>
+                    <td>{{subject.predmet_id.kod}}</td>
+                    <td>{{subject.predmet_id.izborni}}</td>
+                    {% if subject.status == 'izg' %}
+                    <td>Izgubljen potpis</td>
+                    {% elif subject.status == 'pol' %}
+                    <td>Položen</td>
+                    {% else %}
+                    <td>Upisan</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock content %}

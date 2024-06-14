@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    {% if request.user.is_authenticated %}
+
+    {% if request.user.role == 'stu' %}
+    <h1 class="naslov">Dobrodošli {{request.user.username}}, prijavljeni ste kao student</h1>
+
+    <div class="student_box">
+        <div class="statistic_box">
+            <p>Ostvareno bodova: <span>{{data.ostvareno_bodova}}/{{data.ukupno_bodova}}</span></p>
+            <p>Položeno predmeta: <span>{{data.polozeno}}</span></p>
+            <p>Nepoloženo predmeta: <span>{{data.nepolozeno}}</span></p>
+            <p>Izgubljeni predmeti: <span>{{data.izgubljeno}}</span></p>
+        </div>
+    </div>
+
+    {% if predmeti %}
+    <div class="student_predmeti">
+        <h2 class="naslov">Popis predmeta</h2>
+        <table>
+            <tr>
+                <th>Naziv</th>
+                <th>Kod</th>
+                <th>Program</th>
+                <th>Bodovi</th>
+                <th>Semestar</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for predmet in predmeti %}
+            <tr>
+                <td>{{predmet.ime}}</td>
+                <td>{{predmet.kod}}</td>
+                <td>{{predmet.program}}</td>
+                <td>{{predmet.bodovi}}</td>
+                {% if request.user.status == 'izv' %}
+                <td>{{predmet.sem_izvanredni}}</td>
+                {% else %}
+                <td>{{predmet.sem_redovni}}</td>
+                {% endif %}
+                <td>
+                    <a href="{% url 'subject_upis' predmet.id %}">Upiši me na predmet</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    {% endif %}
+    {% else %}
+    <h1>Prijavite se kao student!</h1>
+
+    {%endif%}
+
+    {% else %}
+
+    <h1>Dobrodošli prijavite se u sustav</h1>
+
+    {%endif%}
+</main>
+
+{% endblock content %}

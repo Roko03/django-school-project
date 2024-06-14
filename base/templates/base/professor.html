@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="naslov">Dobrodošao {{ user.username }},prijavljeni ste kao profesor</h1>
+
+{% if predmeti %}
+<div class="statistic">
+    {% for predmet in predmeti %}
+    {% for key, value in predmet.items %}
+    <div class="statistic_box">
+        <h3>{{ key }}</h3>
+        <p>Broj upisa: <span>{{ value.upisani }}</span></p>
+        <p>Broj položenih: <span>{{ value.polozeno }}</span></p>
+        <p>Broj nepoloženih: <span>{{ value.nepolozeno }}</span></p>
+        <p>Broj izgubljenih potpisa: <span>{{ value.izgubljeno }}</span></p>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+{% else %}
+<p>No subjects found.</p>
+{% endif %}
+
+{% endblock content %}

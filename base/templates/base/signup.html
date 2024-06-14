@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="form">
+    <h2>Registriraj se se</h2>
+    {% csrf_token %}
+    <label>
+        {{form.username}}
+    </label>
+    <label>
+        {{form.email}}
+    </label>
+    <label>
+        {{form.password1}}
+    </label>
+    <label>
+        {{form.password2}}
+    </label>
+    <button>Registracija</button>
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock content %}

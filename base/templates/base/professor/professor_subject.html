@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <h2 class="naslov">Moji predmeti</h2>
+    <table>
+        <tr>
+            <th>Ime</th>
+            <th>Kod</th>
+            <th>Program</th>
+            <th>Bodovi</th>
+            <th>Semestar redovni</th>
+            <th>Semestar izvanredni</th>
+            <th>Izborni</th>
+        </tr>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{subject.ime}}</td>
+            <td>{{subject.kod}}</td>
+            <td>{{subject.program}}</td>
+            <td>{{subject.bodovi}}</td>
+            <td>{{subject.sem_redovni}}</td>
+            <td>{{subject.sem_izvanredni}}</td>
+            <td>{{subject.izborni}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+{% endblock content %}

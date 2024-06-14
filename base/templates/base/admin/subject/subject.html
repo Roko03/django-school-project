@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <h2 class="naslov">Lista predmeta</h2>
+    <a href="{% url 'admin_create_subject' %}" class="add_button">Dodaj predmet</a>
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Kod</th>
+            <th>Program</th>
+            <th>Bodovi</th>
+            <th>Izborni</th>
+            <th>Predavač</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{ subject.ime }}</td>
+            <td>{{ subject.kod }}</td>
+            <td>{{ subject.program }}</td>
+            <td>{{ subject.bodovi }}</td>
+            <td>{{ subject.izborni }}</td>
+            <td>{{ subject.korisnik_id.username }}</td>
+            <td>
+                <a href="{% url 'admin_subject_detail' subject.id %}">Details</a>
+            </td>
+            <td>
+                <a href="{% url 'admin_subject_update' subject.id %}">Edit</a>
+            </td>
+            <td>
+                <a href="{% url 'admin_subject_delete' subject.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+{% endblock content %}

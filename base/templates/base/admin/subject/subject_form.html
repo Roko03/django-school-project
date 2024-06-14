@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="form">
+    <h2>Unesi predmet</h2>
+    {% csrf_token %}
+    <label>
+        {{form.ime}}
+    </label>
+    <label>
+        {{form.kod}}
+    </label>
+    <label>
+        {{form.program}}
+    </label>
+    <label>
+        {{form.bodovi}}
+    </label>
+    <label>
+        {{form.sem_redovni}}
+    </label>
+    <label>
+        {{form.sem_izvanredni}}
+    </label>
+    <label>
+        Izborni predmet:
+        {{form.izborni}}
+    </label>
+    <label>
+        Predavač:
+        {{form.korisnik_id}}
+    </label>
+    {% if form.erroros or form.non_fied_errors %}
+    <div>
+        {% for field in form %}
+        {{field.errors}}
+        {% endfor %}
+
+        {{ form.non_fied_errors }}
+    </div>
+    {% endif %}
+    <button>Unesi</button>
+</form>
+
+{% endblock content %}

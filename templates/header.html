@@ -1,0 +1,30 @@
+<header>
+    <ul class="links">
+        {% if request.user.is_authenticated %}
+
+        <ul class="links_user">
+            {% if request.user.role == 'adm' %}
+            <li><a href="{% url 'admin_page' %}">Home</a></li>
+            <li><a href="{% url 'admin_subject' %}">Predmeti</a></li>
+            <li><a href="{% url 'admin_student' %}">Studenti</a></li>
+            <li><a href="{% url 'admin_professor' %}">Profesori</a></li>
+            <li><a href="{% url 'admin_upisi' %}">Upisni listovi</a></li>
+
+            {% elif request.user.role == 'prof' %}
+            <li><a href="{% url 'professor' %}">Home</a></li>
+            <li><a href="{% url 'professor_subject' %}">Moji predmeti</a></li>
+            <li><a href="{% url 'professor_students' %}">Studenti</a></li>
+            {% else %}
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'subject' %}">Predmeti</a></li>
+
+            {% endif %}
+        </ul>
+
+        <li class="logout"><a href="{% url 'logout' %}">Log out</a></li>
+        {% else %}
+        <li><a href="{% url 'signup' %}">Sign up</a></li>
+        <li><a href="{% url 'login' %}">Log in</a></li>
+        {% endif %}
+    </ul>
+</header>

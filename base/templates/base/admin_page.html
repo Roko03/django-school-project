@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<main>
+    <h1 class="naslov">Dobrodošao {{request.user.username}}, prijavljeni ste kao admin</h1>
+    <a href="{% url 'admin_user_form' %}" class="add_button">Dodaj korisnika</a>
+    <table>
+        <tr>
+            <th>Korisničko ime</th>
+            <th>Email</th>
+            <th>Uloga</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        {% for user in users%}
+        <tr>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            {%if user.role == 'adm'%}
+            <td>Admin</td>
+            {%elif user.role == 'prof'%}
+            <td>Profesor</td>
+            {%else%}
+            <td>Student</td>
+            {%endif%}
+            {%if user.status == 'red'%}
+            <td>Redovni student</td>
+            {%elif user.status == 'izv'%}
+            <td>Izvanredni student</td>
+            {%else%}
+            <td>-</td>
+            {%endif%}
+            {% if user.role == 'adm' %}
+            <td><a href="{% url 'admin_user_form_update' user.id %}">Edit</a></td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+{%endif%}
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main>
+    <h2 class="naslov">Moji predmeti</h2>
+    <table>
+        <tr>
+            <th>Korisničko ime</th>
+            <th>Status studenta</th>
+            <th>Naziv predmeta</th>
+            <th>Status predmeta</th>
+            <th></th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{student.korisnik_id.username}}</td>
+            {% if student.korisnik_id.status == 'red' %}
+            <td>Redovni student</td>
+            {% else %}
+            <td>Izvanredni student</td>
+            {% endif %}
+            <td>{{student.predmet_id.ime}}</td>
+            {% if student.status == 'izg' %}
+            <td>Izgubljen potpis</td>
+            {% elif student.status == 'pol' %}
+            <td>Položen</td>
+            {% else %}
+            <td>Upisan</td>
+            {% endif %}
+            <td>
+                <a href="{% url 'professor_student_update' student.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+{% endblock content %}

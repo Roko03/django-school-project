@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="form">
+    <h2>Prijavi se</h2>
+    {% csrf_token %}
+    <label>
+        <input type="email" name="email" placeholder="Unesi email" />
+    </label>
+    <label>
+        <input type="password" name="password" placeholder="Unesi lozinku" />
+    </label>
+    <button>Prijava</button>
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<p>{{subject.ime}}</p>
+<p>{{subject.kod}}</p>
+<p>{{subject.korisnik_id.username}}</p>
+
+{%for student in studenti %}
+<h2>Popis studenta koji su upisali predmet</h2>
+<div class="subject_item">
+    <p>{{student.username}}</p>
+    <p>{{student.email}}</p>
+</div>
+{% endfor %}
+
+{% endblock content %}

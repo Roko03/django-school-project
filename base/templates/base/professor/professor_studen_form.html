@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if form.erroros or form.non_fied_errors %}
+    <div>
+        {% for field in form %}
+        {{field.errors}}
+        {% endfor %}
+
+        {{ form.non_fied_errors }}
+    </div>
+    {% endif %}
+    <button>Submit student</button>
+</form>
+
+{% endblock content %}
